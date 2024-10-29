@@ -35,12 +35,12 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 realDirection = transform.forward * direction.y + transform.right * direction.x;
         realDirection *= stat.moveSpeed;
-        realDirection.y = movementRigidbody.velocity.y;
         moveDirection = realDirection;
     }
 
     private void ApplyMovement(Vector3 moveDirection)
     {
+        moveDirection.y = movementRigidbody.velocity.y;
         movementRigidbody.velocity = moveDirection;
     }
 }

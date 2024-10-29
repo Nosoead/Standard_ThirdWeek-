@@ -42,8 +42,9 @@ public class InputHandler : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started)
+        if (context.phase == InputActionPhase.Performed)
         {
+            Debug.Log("test");
             OnJumpEvent?.Invoke();
         }
     }

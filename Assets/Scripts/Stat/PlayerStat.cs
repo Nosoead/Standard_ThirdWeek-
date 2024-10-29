@@ -10,7 +10,7 @@ public class PlayerStat : MonoBehaviour
 
     [Header("Jump")]
     public float jumpPower;
-    public LayerMask groudLayerMask;
+    public LayerMask groundLayerMask;
 
     [Header("Look")]
     public Transform cameraContainer;
