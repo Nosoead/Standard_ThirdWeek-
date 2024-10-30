@@ -10,6 +10,7 @@ public class InputHandler : MonoBehaviour
     public UnityAction<Vector2> OnMoveEvent;
     public UnityAction<Vector2> OnLookEvent;
     public UnityAction OnJumpEvent;
+    public UnityAction OnUIOpenEvent;
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -46,6 +47,14 @@ public class InputHandler : MonoBehaviour
         {
             Debug.Log("test");
             OnJumpEvent?.Invoke();
+        }
+    }
+
+    public void OnUIOpen(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnUIOpenEvent?.Invoke();
         }
     }
 }
