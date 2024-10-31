@@ -16,7 +16,6 @@ public class InputHandler : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            Debug.Log("test");
             Vector2 moveDirection = context.ReadValue<Vector2>();
             OnMoveEvent?.Invoke(moveDirection);
         }
@@ -29,16 +28,8 @@ public class InputHandler : MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
-        {
-            Vector2 moveDirection = context.ReadValue<Vector2>();
-            OnLookEvent?.Invoke(moveDirection);
-        }
-        else if (context.phase == InputActionPhase.Canceled)
-        {
-            Vector2 moveDirection = context.ReadValue<Vector2>();
-            OnLookEvent?.Invoke(moveDirection);
-        }
+            Vector2 mouseDelta = context.ReadValue<Vector2>();
+            OnLookEvent?.Invoke(mouseDelta);
     }
 
     public void OnJump(InputAction.CallbackContext context)

@@ -16,6 +16,5 @@ public class PlayerStat : MonoBehaviour
     public Transform cameraContainer;
     public float minXLook;
     public float maxXLook;
-    private float cameraCurrentRotation;
     public float lookSensitivity;
 }
