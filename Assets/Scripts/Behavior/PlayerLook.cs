@@ -9,10 +9,11 @@ public class PlayerLook : MonoBehaviour
     private float cameraCurrentXRotation;
     private float cameraCurrentYRotation;
     private Vector2 mouseDelta;
+    private bool canLook = true;
 
     private InputHandler inputHandler;
     private PlayerStat stat;
-
+   
     private void Awake()
     {
         inputHandler = GetComponent<InputHandler>();
@@ -27,15 +28,28 @@ public class PlayerLook : MonoBehaviour
     private void OnEnable()
     {
         inputHandler.OnLookEvent += OnPlayerLook;
+        inputHandler.OnUIOpenEvent += OnUIOpenInLook;
     }
 
     private void OnDisable()
     {
         inputHandler.OnLookEvent -= OnPlayerLook;
+        inputHandler.OnUIOpenEvent -= OnUIOpenInLook;
     }
+
+
     private void LateUpdate()
     {
-        ApplyLook();
+        if (canLook)
+        {
+            ApplyLook();
+        }
+    }
+
+    private void OnUIOpenInLook()
+    {
+        canLook = !canLook;
+        Cursor.lockState = canLook ? CursorLockMode.Locked : CursorLockMode.None;
     }
 
     //¿¬»ê

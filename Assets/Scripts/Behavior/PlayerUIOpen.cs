@@ -1,18 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerUIOpen : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private InputHandler inputHandler;
+    bool isPlaying = true;
+
+    private void Awake()
     {
-        
+        inputHandler = GetComponent<InputHandler>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        inputHandler.OnUIOpenEvent += OnOpenUI;
+    }
+    private void OnDisable()
+    {
+        inputHandler.OnUIOpenEvent -= OnOpenUI;
+    }
+
+    private void Start()
+    {
+        UIManager.Instance.preferences.SetActive(false);
+    }
+
+    private void OnOpenUI()
+    {
+        isPlaying = !isPlaying;
+        UIManager.Instance.preferences.SetActive(!isPlaying);
+        Cursor.lockState = isPlaying ? CursorLockMode.Locked : CursorLockMode.None;
     }
 }
+

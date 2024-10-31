@@ -28,24 +28,30 @@ public class InputHandler : MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext context)
     {
+        if (context.phase == InputActionPhase.Performed)
+        {
             Vector2 mouseDelta = context.ReadValue<Vector2>();
             OnLookEvent?.Invoke(mouseDelta);
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            Vector2 mouseDelta = context.ReadValue<Vector2>();
+            OnLookEvent?.Invoke(mouseDelta);
+        }
+        //Vector2 mouseDelta = context.ReadValue<Vector2>();
+        //    OnLookEvent?.Invoke(mouseDelta);
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            Debug.Log("test");
             OnJumpEvent?.Invoke();
         }
     }
 
     public void OnUIOpen(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
-        {
             OnUIOpenEvent?.Invoke();
-        }
     }
 }

@@ -33,7 +33,6 @@ public class PlayerJump : MonoBehaviour
         {
             ApplyJump();
         }
-        Debug.Log(IsGround());
     }
 
     private bool IsGround()
