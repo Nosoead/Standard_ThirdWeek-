@@ -19,6 +19,8 @@ public class UIManager : MonoBehaviour
     }
 
     public GameObject preferences;
+    public ConditionControllerUI conditionControllerUI;
+    public DamageIndicator damageIndicator;
 
     protected virtual void Awake()
     {

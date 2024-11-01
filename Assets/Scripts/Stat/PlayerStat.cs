@@ -17,4 +17,11 @@ public class PlayerStat : MonoBehaviour
     public float minXLook;
     public float maxXLook;
     public float lookSensitivity;
+
+
+    [Header("Conditions")]
+    [SerializeField] private float startHealth;
+    [SerializeField] private float startMana;
+    public float StartHealth { get { return startHealth; } }
+    public float StartMana { get { return startMana; } }
 }

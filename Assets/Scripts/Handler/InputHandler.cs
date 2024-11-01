@@ -11,6 +11,13 @@ public class InputHandler : MonoBehaviour
     public UnityAction<Vector2> OnLookEvent;
     public UnityAction OnJumpEvent;
     public UnityAction OnUIOpenEvent;
+    public UnityAction OnInteractiveEvent;
+    private ManaHandler manaHandler;
+
+    private void Awake()
+    {
+        manaHandler = GetComponent<ManaHandler>();
+    }
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -52,6 +59,36 @@ public class InputHandler : MonoBehaviour
 
     public void OnUIOpen(InputAction.CallbackContext context)
     {
-            OnUIOpenEvent?.Invoke();
+        OnUIOpenEvent?.Invoke();
+    }
+    public void OnInteractive(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnInteractiveEvent?.Invoke();
+        }
+    }
+
+    public void OnCastSkill(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            Debug.Log("스킬사용");
+            float usingMana = -10;
+            if (manaHandler.CurrentValue > Mathf.Abs(usingMana))
+            {
+                manaHandler.ApplyExternalEffect(usingMana);
+            }
+        }
+    }
+
+    public void OnUsePotion(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            Debug.Log("마나회복");
+            float manaRecovery = 20;
+            manaHandler.ApplyExternalEffect(manaRecovery);
+        }
     }
 }
